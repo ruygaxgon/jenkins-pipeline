@@ -16,5 +16,48 @@ pipeline {
         		sh "./gradlew test"
         	}
         }
+        stage("Package") {
+        	steps {
+        		sh "./gradlew build"
+        	}
+        }
+        // Using docker
+        /*stage("Docker build") {
+        	steps {
+        		sh "docker build -t testpipeline ."
+        	}
+        }*/
+        // push to registry
+        /*stage("Docker push") {
+        	steps {
+        		sh "docker push testpipeline"
+        	}
+        }*/
+        /*stage("Deploy container") {
+        	steps {
+        		sh "docker run -d --rm -p 8090:8090 --name testpipeline testpipeline"
+        	}
+        }*/
+        stage("Aceptance test") {
+        	steps {
+        		sleep 30
+        		sh "test $(curl localhost:8090/sum?a=5&b=5) -eq 10"
+        	}
+        }
+        /*post {
+        	always {
+        		sh "docker stop testpipeline"
+        	}
+        }*/
+        stage("Deploy container") {
+        	steps {
+        		sh "docker-compose up -d"
+        	}
+        }
+        post {
+        	always {
+        		sh "docker-compose down"
+        	}
+        }
     }
 }
