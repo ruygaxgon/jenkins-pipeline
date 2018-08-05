@@ -41,7 +41,7 @@ pipeline {
         stage("Aceptance test") {
         	steps {
         		sleep 30
-        		sh "test $(curl localhost:8090/sum?a=5&b=5) -eq 10"
+        		sh "./tests.sh"
         	}
         }
         /*post {
