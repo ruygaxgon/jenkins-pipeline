@@ -38,15 +38,15 @@ pipeline {
         		//sh "docker run -d --rm -p 8090:8090 --name testpipeline testpipeline"
         	//}
         //}
+        stage("Deploy container") {
+        	steps {
+        		sh "docker-compose up -d"
+        	}
+        }
         stage("Aceptance test") {
         	steps {
         		sleep 30
         		sh "./tests.sh"
-        	}
-        }
-        stage("Deploy container") {
-        	steps {
-        		sh "docker-compose up -d"
         	}
         }
     }
