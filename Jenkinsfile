@@ -44,20 +44,20 @@ pipeline {
         		sh "./tests.sh"
         	}
         }
-        //post {
-        //	always {
-        	//	sh "docker stop testpipeline"
-        	//}
-        //}
         stage("Deploy container") {
         	steps {
         		sh "docker-compose up -d"
         	}
         }
-        post {
-        	always {
-        		sh "docker-compose down"
-        	}
+    }
+    //post {
+    	//always {
+       		//sh "docker stop testpipeline"
+       	//}
+    //}
+    post {
+    	always {
+    		sh "docker-compose down"
         }
     }
 }
