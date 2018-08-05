@@ -22,33 +22,33 @@ pipeline {
         	}
         }
         // Using docker
-        /*stage("Docker build") {
-        	steps {
-        		sh "docker build -t testpipeline ."
-        	}
-        }*/
+        //stage("Docker build") {
+        	//steps {
+        		//sh "docker build -t testpipeline ."
+        	//}
+        //}
         // push to registry
-        /*stage("Docker push") {
-        	steps {
-        		sh "docker push testpipeline"
-        	}
-        }*/
-        /*stage("Deploy container") {
-        	steps {
-        		sh "docker run -d --rm -p 8090:8090 --name testpipeline testpipeline"
-        	}
-        }*/
+        //stage("Docker push") {
+        	//steps {
+        		//sh "docker push testpipeline"
+        	//}
+        //}
+        //stage("Deploy container") {
+        	//steps {
+        		//sh "docker run -d --rm -p 8090:8090 --name testpipeline testpipeline"
+        	//}
+        //}
         stage("Aceptance test") {
         	steps {
         		sleep 30
         		sh "./tests.sh"
         	}
         }
-        /*post {
-        	always {
-        		sh "docker stop testpipeline"
-        	}
-        }*/
+        //post {
+        //	always {
+        	//	sh "docker stop testpipeline"
+        	//}
+        //}
         stage("Deploy container") {
         	steps {
         		sh "docker-compose up -d"
