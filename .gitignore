@@ -2,6 +2,7 @@
 *.class
 .gradle/
 bin/
+build/
 
 # Log file
 *.log
